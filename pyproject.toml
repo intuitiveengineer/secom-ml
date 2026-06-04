@@ -1,0 +1,13 @@
+[project]
+name = "secom"
+version = "0.1.0"
+description = "UCI SECOM dataset analysis"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "ipykernel>=7.2.0",
+    "jupyter>=1.1.1",
+    "matplotlib>=3.10.9",
+    "seaborn>=0.13.2",
+    "uci-dataset>=0.0.7",
+]
