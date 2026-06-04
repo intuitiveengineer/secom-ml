@@ -10,4 +10,5 @@ dependencies = [
     "matplotlib>=3.10.9",
     "seaborn>=0.13.2",
     "uci-dataset>=0.0.7",
+    "ucimlrepo>=0.0.7",
 ]
