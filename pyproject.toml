@@ -11,4 +11,5 @@ dependencies = [
     "seaborn>=0.13.2",
     "uci-dataset>=0.0.7",
     "ucimlrepo>=0.0.7",
+    "xgboost>=3.2.0",
 ]
