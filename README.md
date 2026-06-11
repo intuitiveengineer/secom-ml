@@ -55,23 +55,45 @@ Current models achieve ROC-AUC values in the ~0.70–0.80 range, demonstrating m
 
 ---
 
-## Current Research
+## Exploratory Data Analysis Findings
 
-Areas currently being explored:
+A comprehensive exploratory analysis was performed to better understand the structure of the SECOM dataset before model development.
 
-- Leakage-free preprocessing pipelines
-- Feature engineering
-- PCA and latent variable methods
-- Partial Least Squares (PLS) and PLS-DA
-- Threshold optimization for failure detection
-- Model interpretation and feature importance analysis
+Methods explored included:
+
+- Principal Component Analysis (PCA)
+- Partial Least Squares (PLS)
+- UMAP
+- t-SNE
+- Kernel PCA
+- Gaussian Mixture Models (GMM)
+- Sensor-level risk analysis
+- Correlation analysis
+- Mutual information analysis
+
+Several consistent findings emerged:
+
+- No clear failure cluster was observed in PCA, UMAP, t-SNE, Kernel PCA, or GMM visualizations.
+- Failures appear throughout the sensor space rather than forming a distinct population.
+- Multiple supervised and unsupervised methods repeatedly identified a small group of sensors as being associated with elevated failure risk.
+- Certain regions of sensor space showed failure rates 2-3× higher than the baseline failure rate, indicating localized process regimes with increased risk.
+- A Gaussian Mixture Model identified an elevated-risk process regime with approximately twice the baseline failure rate, further supporting the presence of probabilistic rather than deterministic failure behavior.
+
+Overall, the evidence suggests that manufacturing failures are not driven by a single separable failure mode. Instead, failures occur across overlapping process conditions where risk increases in specific regions of the sensor space.
 
 ---
 
-## Future Work
+## Current Research
 
-- Robust nested cross-validation
-- Advanced feature selection techniques
-- Ensemble methods and stacking
-- Time-dependent process trajectory analysis
-- Manufacturing domain interpretation of key sensors
+Current efforts are focused on building a leakage-free modeling pipeline and evaluating model performance under rigorous cross-validation.
+
+Areas being explored include:
+
+- Leakage-free preprocessing pipelines
+- Correlation filtering and feature selection within cross-validation
+- Mutual information based feature screening
+- L1-regularized logistic regression
+- Random Forest and XGBoost models
+- PCA, PLS, and latent variable methods
+- Threshold optimization for imbalanced classification
+- Feature stability and model interpretability
