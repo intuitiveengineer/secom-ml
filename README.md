@@ -127,6 +127,23 @@ Threshold selection was performed using out-of-fold predictions from the trainin
 
 ---
 
+## Reproduce
+
+Install the project environment with:
+
+```bash
+uv sync
+```
+
+Run the notebooks in order:
+
+1. `notebooks/00-data-exploration.ipynb`
+2. `notebooks/01-modeling.ipynb`
+
+Saved figures are written to `figures/`, and summary tables are written to `tables/`.
+
+---
+
 ## Final Takeaway
 
 The project demonstrates that meaningful failure prediction is possible on the SECOM dataset, but the signal is subtle. The best results came from a leakage-safe Random Forest pipeline combined with feature reduction. This supports the conclusion that failures are associated with a limited set of interacting process signals rather than a cleanly separable failure population.
