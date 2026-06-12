@@ -108,8 +108,8 @@ Example EDA figures:
 - [PCA cumulative explained variance](figures/pca_cumulative_explained_variance.png)
 - [PCA PC1/PC2 projection](figures/pca_pc1_pc2_projection.png)
 - [UMAP projection](figures/umap_projection.png)
+- [Attribute 104 failure rate by sensor decile](figures/failure_rate_decile_Attribute_104.png)
 - [Attribute 60 failure rate by sensor decile](figures/failure_rate_decile_Attribute_60.png)
-- [Attribute 349 failure rate by sensor decile](figures/failure_rate_decile_Attribute_349.png)
 
 ---
 
