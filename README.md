@@ -54,20 +54,22 @@ The SECOM dataset contains 1,567 manufacturing observations with 590 process sen
 
 ## Results Summary
 
-The strongest final model was a reduced-feature Random Forest using 25 sensors. On the holdout set, it achieved:
+The final model was a tuned Random Forest using a leakage-safe preprocessing pipeline. Model selection and threshold selection were performed using training data only, then the model was evaluated on the held-out test set.
 
-- ROC-AUC: 0.789
-- PR-AUC: 0.253
-- Precision: 0.250
-- Recall: 0.143
-- Flagged rate: 3.8%
-- Enrichment: 3.7x the baseline failure rate
+On the holdout set, the final model achieved:
+
+- ROC-AUC: 0.759
+- PR-AUC: 0.214
+- Precision: 0.286
+- Recall: 0.286
+- Flagged rate: 6.7%
+- Enrichment: 4.3x the baseline failure rate
 
 The full project summary is available in [tables/project_summary.md](tables/project_summary.md), and the reduced-feature model comparison is available in [tables/reduced_feature_results.md](tables/reduced_feature_results.md).
 
 The baseline model comparison showed that tree-based ensemble methods performed better than linear models under cross-validation. Those results are summarized in [tables/model_performance_summary.md](tables/model_performance_summary.md).
 
-The reduced-feature experiments were especially important. Cross-validated PR-AUC improved as the model moved from a very small sensor set toward roughly 15 to 30 selected sensors, suggesting that most of the useful signal is concentrated in a limited group of process measurements.
+The reduced-feature experiments were treated as exploratory. They showed that feature reduction can improve cross-validated PR-AUC, but the best feature count was not stable on the holdout set. Training-only cross-validation favored a smaller reduced model, while a post-hoc holdout sweep favored a broader feature set. Because the holdout set contains only a small number of failures, these differences should be interpreted cautiously rather than as proof of one exact optimal feature count.
 
 ![Feature Count vs CV PR-AUC](figures/reduced_feature_cv_pr_auc.png)
 
@@ -113,12 +115,12 @@ Example EDA figures:
 
 ## Model Interpretation
 
-Feature importance was evaluated using Random Forest impurity importance, permutation importance, and cross-validation stability checks. These methods pointed to a smaller set of sensors that repeatedly carried useful predictive signal.
+Feature importance was evaluated using Random Forest impurity importance, cross-validated permutation importance, and cross-validation stability checks. Attribute 104 was the strongest feature across both Random Forest importance and cross-validated permutation importance. Other recurring sensors included Attributes 60, 34, 32, 65, 66, 206, 214, 248, and 511.
 
 Key interpretation figures:
 
 - [Random Forest feature importance, top 20](figures/rf_feature_importance_top20.png)
-- [Permutation importance, top 20](figures/permutation_importance_top20.png)
+- [Cross-validated permutation importance, top 20](figures/permutation_importance_top20.png)
 - [Tuned Random Forest ROC curve](figures/tuned_rf_roc_curve.png)
 - [Tuned Random Forest precision-recall curve](figures/tuned_rf_precision_recall_curve.png)
 - [Cross-validated threshold tradeoff](figures/cv_threshold_tradeoff.png)
@@ -146,4 +148,4 @@ Saved figures are written to `figures/`, and summary tables are written to `tabl
 
 ## Final Takeaway
 
-The project demonstrates that meaningful failure prediction is possible on the SECOM dataset, but the signal is subtle. The best results came from a leakage-safe Random Forest pipeline combined with feature reduction. This supports the conclusion that failures are associated with a limited set of interacting process signals rather than a cleanly separable failure population.
+The project demonstrates that meaningful failure prediction is possible on the SECOM dataset, but the signal is subtle. The strongest result is a leakage-safe Random Forest that ranks wafer risk above baseline. Reduced-feature modeling suggests that useful information is concentrated in a recurring subset of process sensors, but the exact feature count should be treated as exploratory rather than definitive.
